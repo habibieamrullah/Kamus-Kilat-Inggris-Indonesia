@@ -19,13 +19,13 @@ div{
 }
 #appbar{
 	padding: 20px;
-	background-color: #36a446;
+	background-color: #36a346;
 	color: white;
 	user-select: none;
 }
 #drawer{
 	position: fixed;
-	background-color: #c6efcc;
+	background-color: #c6ffce;
 	color: #504b3c;
 	top: 0;
 	left: 0;
@@ -67,15 +67,15 @@ a{
 	display: inline-block;
 	padding: 10px;
 	margin: 3px;
-	border: 1px solid #36a446;
+	border: 1px solid #36a346;
 	border-radius: 3px;
-	color: #36a446;
+	color: #36a346;
 	cursor: pointer;
 	transition: background-color, color .5s;
 }
 .letterlist:hover{
 	color: white;
-	background-color: #36a446;
+	background-color: #36a346;
 }
 .wlist{
 	background-color: white;
@@ -102,7 +102,7 @@ a{
 	height: 20px;
 	text-align: center;
 	border-radius: 50%;
-	background-color: #36a446;
+	background-color: #36a346;
 	color: white;
 	display: none;
 }

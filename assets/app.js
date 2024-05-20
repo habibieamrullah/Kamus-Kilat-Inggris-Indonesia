@@ -12,10 +12,10 @@ Support me by becoming my Patreon supporter: https://patreon.com/habibieamrullah
 var credit = "PERHATIAN : Mungkin konten kamus ini tidak akurat. Gunakan aplikasi ini dengan risiko yang Anda tanggung sendiri.";
 
 //Info notes to be displayed to users
-var info = "<h2>Kamus Kilat Inggris-Indonesia</h2><p>This dictionary app contains more than 3000 vocabularies. Please note that may be some definitons are not correct. Please use this app at your own risk.</p><p>Aplikasi kamus ini mencakup kurang lebih 3000 kosa kata Inggris Indonesia.</p><p>PERHATIAN : Mungkin konten kamus ini tidak akurat. Gunakan aplikasi ini dengan risiko yang Anda tanggung sendiri.</p>";
+var info = "<h2>Kamus Sederhana Indonesia-Inggris</h2><p>This dictionary app contains more than 3000 vocabularies. Please note that may be some definitons are not correct. Please use this app at your own risk.</p><p>Aplikasi kamus ini mencakup kurang lebih 3000 kosa kata Inggris Indonesia.</p><p>PERHATIAN : Mungkin konten kamus ini tidak akurat. Gunakan aplikasi ini dengan risiko yang Anda tanggung sendiri.</p>";
 
 //General app info
-var title = "Kamus Kilat Inggris-Indonesia";
+var title = "K.S. Indonesia-Inggris";
 
 //Share link
 var shareLink = function(){
@@ -36,6 +36,7 @@ $(document).ready(function(){
 	resizeEl();
 	putCredit();
 	listWords('en', 'a');
+	zk.showBanner();
 });
 
 //When user's window is resized...
@@ -46,6 +47,24 @@ $(window).resize(function() {
 //FUNCTIONS
 
 //listing words grouped based on its first letter. Replace "id" and "en" to anything you wish, in my case "id" = Indonesian and "en" = English.
+
+
+function showDef(isen, idx){
+	var transContent;
+	if(isen){
+		transContent = "<div style='border-radius: 0.5em; display: inline-block; background-color: white; padding: 1em;'><h5><img src='english.png' style='height: 24px; vertical-align: middle;'> English:</h5><h1>"+definitions[idx].en+"</h1><br><br><h5><img src='indonesian.png' style='height: 24px; vertical-align: middle;'> Bahasa Indonesia:</h5><h1>"+definitions[idx].id+"</h1></div>";
+	}else{
+		transContent = "<div style='border-radius: 0.5em; display: inline-block; background-color: white; padding: 1em;'><h5><img src='indonesian.png' style='height: 24px; vertical-align: middle;'> Bahasa Indonesia:</h5><h1>"+definitions[idx].id+"</h1><br><br><h5><img src='english.png' style='height: 24px; vertical-align: middle;'> English:</h5><h1>"+definitions[idx].en+"</h1></div>";
+	}
+	
+	$("body").append("<div id='sdf' onclick='closeSdf();' style='position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.75); padding: 5em;'><div style='display: table; width: 100%; height: 100%;'><div style='display: table-cell; vertical-align: middle; text-align: center;'>"+transContent+"</div></div></div>");
+}
+
+function closeSdf(){
+	$("#sdf").remove();
+}
+
+
 function listWords(lang, letter){
 	$("#main").hide().html("<h2>Letter/Huruf \""+letter.toUpperCase()+"\"</h2>");
 	
@@ -60,10 +79,10 @@ function listWords(lang, letter){
 		if(curdef === letter){
 			if(lang === "en"){
 				hasresult = true;
-				$("#main").append("<div class='wlist'><b>" + definitions[i].en + "</b> : " + definitions[i].id + "</div>");
+				$("#main").append("<div class='wlist' onclick='showDef(true, "+i+")'><b>" + definitions[i].en + "</b> : " + definitions[i].id + "</div>");
 			}else{
 				hasresult = true;
-				$("#main").append("<div class='wlist'><b>" + definitions[i].id + "</b> : " + definitions[i].en + "</div>");
+				$("#main").append("<div class='wlist' onclick='showDef(false, "+i+")'><b>" + definitions[i].id + "</b> : " + definitions[i].en + "</div>");
 			}
 		}
 	}
@@ -82,6 +101,7 @@ function listWords(lang, letter){
 	$("#main").fadeIn().scrollTop(0);
 	//if list is too long, show scroll to bottom button
 	showScrollBottom();
+	zk.showAd();
 }
 
 //Resizing elements to fit current screen
@@ -130,6 +150,7 @@ function qf(){
 			$("#sresult").html(sresult);
 			sortWordList("sresult");
 			$("#qf").val("");
+			zk.showAd();
 		}, 1500);
 	}
 }
